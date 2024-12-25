@@ -1,22 +1,30 @@
-// import * as BootBot from '@stefancfuchs/bootbot'
+'use strict';
 
-// const bot = new BootBot({
-//     accessToken: 'EAAgLbXlzKLsBOzI2MkkG94d3bYLC2wsZBTXUbSW2piQKRGS7xIioiN63Hv1Vl9N3s9cz3npOQ7tHXiUWtLIHTIoQhWF9RU7sVVZC4THe1UefmL18uIc6XGgKLGEnDMqsRpsubm9VkztZA6ZAU9odPW0OeKONGTJTyZCJA9oKJj7acR3CL6zkNPPPBxh0Uc4H8eSBTBOTHlMVqNQAI',
-//     verifyToken: 'FB_VERIFY_TOKEN',
-//     appSecret: '92c41480e59891e28a2a73f5c26401d5',
+require('dotenv').config()
+import * as BootBot from '@stefancfuchs/bootbot'
 
-// });
+console.log(`
+    accessToken: ${process.env.ACCESS_TOKEN},
+    verifyToken: ${process.env.VERIFY_TOKEN},
+    appSecret: ${process.env.APP_SECRET}, 
+`)
 
-// // bot.on('message', (payload, chat) => {
-// //     const text = payload.message.text;
-// //     console.log(`The user said: ${text}`);
-// // });
+const bot = new BootBot({
+    accessToken: process.env.ACCESS_TOKEN,
+    verifyToken: process.env.VERIFY_TOKEN,
+    appSecret: process.env.APP_SECRET,
+});
 
-// // bot.hear(['hello', 'hi', /hey( there)?/i], (payload, chat) => {
-// //     chat.say('Hello, human friend!').then(() => {
-// //         chat.say('How are you today?');
-// //     });
-// // });
+bot.on('message', (payload, chat) => {
+    const text = payload.message.text;
+    console.log(`The user said: ${text}`);
+});
+
+bot.hear(['hello', 'hi', /hey( there)?/i], (payload, chat) => {
+    chat.say('Hello, human friend!').then(() => {
+        chat.say('How are you today?');
+    });
+});
 
 // bot.start();
 
@@ -25,7 +33,7 @@ const app = express()
 const port = process.env.PORT || 3002
 
 app.get('/', (req, res) => {
-    res.send('Hello World!')
+    res.send(`Hello World! ${port}`)
 })
 
 app.listen(port, () => {

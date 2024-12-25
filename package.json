@@ -18,6 +18,8 @@
   },
   "dependencies": {
     "@stefancfuchs/bootbot": "^1.0.20",
+    "bootbot": "^1.1.0",
+    "dotenv": "^16.4.7",
     "express": "^4.21.2"
   }
 }
